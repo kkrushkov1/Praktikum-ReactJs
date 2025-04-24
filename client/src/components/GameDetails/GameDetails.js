@@ -10,7 +10,7 @@ export const GameDetails = () => {
         gameService.getById(gameId).then((result) => {
             setGame(result);
         });
-    }, []);
+    }, [gameId]);
 
     return (
         <section id="game-details">
