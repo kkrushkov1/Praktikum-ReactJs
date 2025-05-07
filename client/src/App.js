@@ -37,12 +37,19 @@ function App() {
         setGames((state) => state.map((x) => (x.id === gameId ? gameData : x)));
     };
 
+    const gameDelete = (gameId) => {
+        setGames((state) => state.filter((game) => game.id !== gameId));
+        navigate("/");
+    };
+
     return (
         <AuthProvider>
             <div id="box">
                 <Header />
 
-                <GameContext.Provider value={{ games, gameAdd, gameEdit }}>
+                <GameContext.Provider
+                    value={{ games, gameAdd, gameEdit, gameDelete }}
+                >
                     <main id="main-content">
                         <Routes>
                             <Route path="/" element={<Home games={games} />} />
@@ -62,8 +69,7 @@ function App() {
                                 path="/catalog/:gameId"
                                 element={
                                     <GameDetails
-                                        games={games}
-                                        // addComment={addComment}
+                                    // addComment={addComment}
                                     />
                                 }
                             />

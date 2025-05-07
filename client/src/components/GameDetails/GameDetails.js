@@ -1,11 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { GameContext } from "../../contexts/GameContext";
 import * as gameService from "../../services/gameService";
 
 export const GameDetails = () => {
     const { gameId } = useParams();
     const { user } = useContext(AuthContext);
+    const { gameDelete } = useContext(GameContext);
     const [game, setGame] = useState("");
 
     useEffect(() => {
@@ -13,6 +15,18 @@ export const GameDetails = () => {
             setGame(result);
         });
     }, [gameId]);
+
+    const deleteGameHandler = async () => {
+        const hasConfirm = window.confirm(
+            `Are you sure you want to delete ${game.title} game?`
+        );
+
+        if (!hasConfirm) {
+            return;
+        }
+        await gameService.deleteById(gameId); // don't use result
+        gameDelete(gameId);
+    };
 
     return (
         <section id="game-details">
@@ -44,9 +58,9 @@ export const GameDetails = () => {
                         <Link to={`/games/${gameId}/edit`} className="button">
                             Edit
                         </Link>
-                        <a href="#" className="button">
+                        <button className="button" onClick={deleteGameHandler}>
                             Delete
-                        </a>
+                        </button>
                     </div>
                 )}
             </div>
