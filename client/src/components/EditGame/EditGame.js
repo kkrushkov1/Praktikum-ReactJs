@@ -1,40 +1,50 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { GameContext } from "../../contexts/GameContext";
 import * as gameService from "../../services/gameService";
+import { GameContext } from "../../contexts/GameContext";
 
-export const CreateGame = ({}) => {
-    const { gameAdd } = useContext(GameContext);
+export const EditGame = () => {
+    const [currentGame, setCurrentGame] = useState({});
+    const { gameEdit } = useContext(GameContext);
+    const { gameId } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        gameService.getById(gameId).then((gameData) => {
+            setCurrentGame(gameData);
+        });
+    }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         const gameData = Object.fromEntries(new FormData(e.target));
 
-        gameService.create(gameData).then((result) => {
-            gameAdd(result);
+        gameService.edit(gameId, gameData).then((result) => {
+            gameEdit(gameId, result);
+            navigate(`/catalog/${gameId}`);
         });
     };
 
     return (
-        <section id="create-page" className="auth">
-            {/* Uncontrolled forms */}
-            <form id="create" onSubmit={onSubmit}>
+        <section id="edit-page" className="auth">
+            <form id="edit" onSubmit={onSubmit}>
                 <div className="container">
-                    <h1>Create Game</h1>
+                    <h1>Edit Game</h1>
                     <label htmlFor="leg-title">Legendary title:</label>
                     <input
                         type="text"
                         id="title"
                         name="title"
-                        placeholder="Enter game title..."
+                        defaultValue={currentGame.title}
                     />
                     <label htmlFor="category">Category:</label>
                     <input
                         type="text"
                         id="category"
                         name="category"
-                        placeholder="Enter game category..."
+                        defaultValue={currentGame.category}
                     />
                     <label htmlFor="levels">MaxLevel:</label>
                     <input
@@ -42,21 +52,25 @@ export const CreateGame = ({}) => {
                         id="maxLevel"
                         name="maxLevel"
                         min={1}
-                        placeholder={1}
+                        defaultValue={currentGame.maxLevel}
                     />
                     <label htmlFor="game-img">Image:</label>
                     <input
                         type="text"
                         id="imageUrl"
                         name="imageUrl"
-                        placeholder="Upload a photo..."
+                        defaultValue={currentGame.imageUrl}
                     />
                     <label htmlFor="summary">Summary:</label>
-                    <textarea name="summary" id="summary" defaultValue={""} />
+                    <textarea
+                        name="summary"
+                        id="summary"
+                        defaultValue={currentGame.summary}
+                    />
                     <input
                         className="btn submit"
                         type="submit"
-                        value="Create Game"
+                        defaultValue="Edit Game"
                     />
                 </div>
             </form>

@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
     }, [auth]);
 
     const userLogin = (authData) => {
-        const { user } = authData;
         setAuth(authData);
     };
 
