@@ -30,6 +30,10 @@ function App() {
     };
 
     const gameEdit = (gameId, gameData) => {
+        if (!gameData || typeof gameData !== "object" || !gameData.id) {
+            console.log("Invalid game data, skipping update");
+            return;
+        }
         setGames((state) => state.map((x) => (x.id === gameId ? gameData : x)));
     };
 

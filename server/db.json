@@ -1,9 +1,9 @@
 {
   "games": [
     {
-      "title": "MK3 Ultimate 2",
+      "title": "MK3 Ultimate 22",
       "category": "Fighting",
-      "maxLevel": "10",
+      "maxLevel": "1001",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Ultimate_MK3.png/220px-Ultimate_MK3.png",
       "summary": "Ultimate Mortal Kombat 3 was released to arcades in 1995. It is an update of Mortal Kombat 3, featuring altered gameplay, additional characters, and new arenas. Various home versions of the game were released soon afterward, although none of these were completely identical to the arcade version.",
       "userId": 1,
@@ -73,7 +73,7 @@
       "id": "k6I6J5m"
     },
     {
-      "title": "Call of Duty",
+      "title": "Call of Duty Mobile",
       "category": "Action",
       "maxLevel": "100",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/5/58/COD_Warzone_Mobile_Key_Art.png",

@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 export const CatalogItem = ({ game }) => {
+    const { user } = useContext(AuthContext);
+
     return (
         <div className="allGames">
             <div className="allGames-info">
@@ -10,13 +14,15 @@ export const CatalogItem = ({ game }) => {
                 <Link to={`/catalog/${game.id}`} className="details-button">
                     Details
                 </Link>
-                <Link
-                    style={{ marginLeft: "120px" }}
-                    to={`/games/${game.id}/edit`}
-                    className="details-button"
-                >
-                    Edit
-                </Link>
+                {user.user && user.user.id === game.userId && (
+                    <Link
+                        style={{ marginLeft: "120px" }}
+                        to={`/games/${game.id}/edit`}
+                        className="details-button"
+                    >
+                        Edit
+                    </Link>
+                )}
             </div>
         </div>
     );

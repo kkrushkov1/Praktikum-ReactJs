@@ -1,9 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import * as gameService from "../../services/gameService";
 
 export const GameDetails = () => {
     const { gameId } = useParams();
+    const { user } = useContext(AuthContext);
     const [game, setGame] = useState("");
 
     useEffect(() => {
@@ -37,14 +39,16 @@ export const GameDetails = () => {
                     <p className="no-comment">No comments.</p>
                 </div>
 
-                <div className="buttons">
-                    <Link to={`/games/${gameId}/edit`} className="button">
-                        Edit
-                    </Link>
-                    <a href="#" className="button">
-                        Delete
-                    </a>
-                </div>
+                {user.user && user.user.id === game.userId && (
+                    <div className="buttons">
+                        <Link to={`/games/${gameId}/edit`} className="button">
+                            Edit
+                        </Link>
+                        <a href="#" className="button">
+                            Delete
+                        </a>
+                    </div>
+                )}
             </div>
 
             <article className="create-comment">
