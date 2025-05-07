@@ -1,5 +1,16 @@
 const request = async (method, url, data) => {
     try {
+        const authString = localStorage.getItem("auth");
+        const auth = JSON.parse(authString || "{}");
+        let userId;
+        let headers = {};
+
+        if (auth.accessToken) {
+            headers["Authorization"] = `Bearer ${auth.accessToken}`;
+            userId = auth.user.id;
+        }
+
+        const body = { ...data, userId };
         let buildRequest;
 
         if (method === "GET") {
@@ -10,7 +21,7 @@ const request = async (method, url, data) => {
                 headers: {
                     "content-type": "application/json",
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(body),
             });
         }
         const response = await buildRequest;

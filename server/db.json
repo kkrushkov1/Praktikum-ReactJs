@@ -1,72 +1,84 @@
 {
-  "games": [
-    {
-      "title": "MK3 Ultimate",
-      "category": "Fighting",
-      "maxLevel": "10",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Ultimate_MK3.png/220px-Ultimate_MK3.png",
-      "summary": "Ultimate Mortal Kombat 3 was released to arcades in 1995. It is an update of Mortal Kombat 3, featuring altered gameplay, additional characters, and new arenas. Various home versions of the game were released soon afterward, although none of these were completely identical to the arcade version.",
-      "id": "16556940-95f1-43dc-9ad1-34affe32eb54"
-    },
-    {
-      "title": "Counter Strike 1.6",
-      "category": "FPS",
-      "maxLevel": "100",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/en/6/67/Counter-Strike_Box.jpg",
-      "summary": "Play the world's number 1 online action game. Engage in an incredibly realistic brand of terrorist warfare in this wildly popular team-based game.",
-      "id": "dd143899-b484-4f87-8b70-c78607b72d88"
-    },
-    {
-      "title": "Minecraft",
-      "category": "survival",
-      "maxLevel": "100",
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-      "summary": "A 3D sandbox adventure game developed by Mojang Studios where players can interact with a fully customizable three-dimensional world made of blocks and entities",
-      "id": "dd143899-b484-4f87-8b70-1a3607b72d88"
-    },
-    {
-      "title": "Deep Rock Galactic",
-      "category": "Co-op FPS PVE",
-      "maxLevel": 30,
-      "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/1407/2JSde8PFCF6B4nO2EECrcR1m.png",
-      "summary": "I'm wondering if fighting bugs and moving dirt is the best way to make a living. For Rock and Stone.",
-      "id": "dd143899-b484-4f87-8b70-1a3607b72d78"
-    },
-    {
-      "title": "Delta Force 1",
-      "category": "Shooter",
-      "maxLevel": "30",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/en/a/a5/DF1-game.JPG",
-      "summary": "Delta Force 1 is a tactical shooter game where players assume the role of a member of the elite counter-terrorism unit, Delta Force.",
-      "id": "da143899-b484-4f87-8b70-1a3607b72d12"
-    },
-    {
-      "title": "Test game",
-      "category": "Action",
-      "maxLevel": "28",
-      "imageUrl": "https://wallpapers.com/images/hd/action-games-1920-x-1080-wallpaper-fnil7p01xin80bzl.jpg",
-      "summary": "best game",
-      "id": "hJZ1ADs"
-    },
-    {
-      "title": "Naughty Bear",
-      "category": "Action",
-      "maxLevel": "33",
-      "imageUrl": "https://m.media-amazon.com/images/M/MV5BNjU3MjA2MmEtMzk1OC00NDg5LWE2ZjEtODZhOTI0YTZiODAxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-      "summary": "Test",
-      "id": "JKpiTKi"
-    }
-  ],
-  "users": [
-    {
-      "email": "user1@example.com",
-      "password": "$2a$10$/h1Mh.LmSOvssqz7.gYSA.cSZdVcXCc/8uVENL7Ar1WnDXdcrDfN.",
-      "id": 1
-    },
-    {
-      "email": "user2@example.com",
-      "password": "$2a$10$dvgzVQ.iwtSTUesZCgz6eO33csij4PgL01KI7Xcoz17ef9X1C7ese",
-      "id": 2
-    }
-  ]
+    "games": [
+        {
+            "title": "MK3 Ultimate",
+            "category": "Fighting",
+            "maxLevel": "10",
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Ultimate_MK3.png/220px-Ultimate_MK3.png",
+            "summary": "Ultimate Mortal Kombat 3 was released to arcades in 1995. It is an update of Mortal Kombat 3, featuring altered gameplay, additional characters, and new arenas. Various home versions of the game were released soon afterward, although none of these were completely identical to the arcade version.",
+            "userId": 1,
+            "id": "16556940-95f1-43dc-9ad1-34affe32eb54"
+        },
+        {
+            "title": "Counter Strike 1.6",
+            "category": "FPS",
+            "maxLevel": "100",
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/en/6/67/Counter-Strike_Box.jpg",
+            "summary": "Play the world's number 1 online action game. Engage in an incredibly realistic brand of terrorist warfare in this wildly popular team-based game.",
+            "userId": 1,
+            "id": "dd143899-b484-4f87-8b70-c78607b72d88"
+        },
+        {
+            "title": "Minecraft",
+            "category": "survival",
+            "maxLevel": "100",
+            "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+            "summary": "A 3D sandbox adventure game developed by Mojang Studios where players can interact with a fully customizable three-dimensional world made of blocks and entities",
+            "userId": 1,
+            "id": "dd143899-b484-4f87-8b70-1a3607b72d88"
+        },
+        {
+            "title": "Deep Rock Galactic",
+            "category": "Co-op FPS PVE",
+            "maxLevel": 30,
+            "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/1407/2JSde8PFCF6B4nO2EECrcR1m.png",
+            "summary": "I'm wondering if fighting bugs and moving dirt is the best way to make a living. For Rock and Stone.",
+            "userId": 1,
+            "id": "dd143899-b484-4f87-8b70-1a3607b72d78"
+        },
+        {
+            "title": "Delta Force 1",
+            "category": "Shooter",
+            "maxLevel": "30",
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/en/a/a5/DF1-game.JPG",
+            "summary": "Delta Force 1 is a tactical shooter game where players assume the role of a member of the elite counter-terrorism unit, Delta Force.",
+            "userId": 1,
+            "id": "da143899-b484-4f87-8b70-1a3607b72d12"
+        },
+        {
+            "title": "Test game",
+            "category": "Action",
+            "maxLevel": "28",
+            "imageUrl": "https://wallpapers.com/images/hd/action-games-1920-x-1080-wallpaper-fnil7p01xin80bzl.jpg",
+            "summary": "best game",
+            "userId": 1,
+            "id": "hJZ1ADs"
+        },
+        {
+            "title": "Naughty Bear",
+            "category": "Action",
+            "maxLevel": "33",
+            "imageUrl": "https://m.media-amazon.com/images/M/MV5BNjU3MjA2MmEtMzk1OC00NDg5LWE2ZjEtODZhOTI0YTZiODAxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+            "summary": "Test",
+            "userId": 2,
+            "id": "JKpiTKi"
+        },
+        {
+            "summary": "bla bla",
+            "userId": 2,
+            "id": "k6I6J5m"
+        }
+    ],
+    "users": [
+        {
+            "email": "user1@example.com",
+            "password": "$2a$10$/h1Mh.LmSOvssqz7.gYSA.cSZdVcXCc/8uVENL7Ar1WnDXdcrDfN.",
+            "id": 1
+        },
+        {
+            "email": "user2@example.com",
+            "password": "$2a$10$dvgzVQ.iwtSTUesZCgz6eO33csij4PgL01KI7Xcoz17ef9X1C7ese",
+            "id": 2
+        }
+    ]
 }

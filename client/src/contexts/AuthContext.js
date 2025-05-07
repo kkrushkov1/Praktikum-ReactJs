@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
     const userLogin = (authData) => {
         const { user } = authData;
-        setAuth(user);
+        setAuth(authData);
     };
 
     const userLogout = () => {

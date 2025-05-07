@@ -12,10 +12,9 @@ export const Header = () => {
                 </Link>
             </h1>
             <nav>
-                {user.email && <span>{user.email}</span>}
+                {user.user?.email && <span>{user.user?.email}</span>}
                 <Link to="/catalog">All games</Link>
-
-                {user.email ? (
+                {user.user?.email ? (
                     <div id="user">
                         <Link to="/create">Create Game</Link>
                         <Link to="/logout">Logout</Link>
