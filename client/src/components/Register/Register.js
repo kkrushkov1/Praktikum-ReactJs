@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as authService from "../../services/authService";
@@ -7,24 +7,42 @@ import { AuthContext } from "../../contexts/AuthContext";
 export const Register = () => {
     const { userLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
-
-        const formData = new FormData(e.target);
-
-        const email = formData.get("email");
-        const password = formData.get("password");
-        const confirmPassword = formData.get("confirm-password");
 
         if (password !== confirmPassword) {
             return;
         }
 
-        authService.register(email, password).then((authData) => {
+        const registerInfo = {
+            username,
+            email,
+            password,
+        };
+        authService.register(registerInfo).then((authData) => {
             userLogin(authData);
             navigate("/");
         });
+    };
+
+    const usernameChangeHandler = (e) => {
+        setUsername(e.target.value);
+    };
+
+    const emailChangeHandler = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const passwordChangeHandler = (e) => {
+        setPassword(e.target.value);
+    };
+    const confirmPasswordChangeHandler = (e) => {
+        setConfirmPassword(e.target.value);
     };
 
     return (
@@ -33,29 +51,43 @@ export const Register = () => {
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Register</h1>
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        onChange={usernameChangeHandler}
+                        value={username}
+                    />
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
                         placeholder="maria@email.com"
+                        onChange={emailChangeHandler}
+                        value={email}
                     />
                     <label htmlFor="pass">Password:</label>
                     <input
                         type="password"
                         name="password"
                         id="register-password"
+                        onChange={passwordChangeHandler}
+                        value={password}
                     />
                     <label htmlFor="con-pass">Confirm Password:</label>
                     <input
                         type="password"
                         name="confirm-password"
                         id="confirm-password"
+                        onChange={confirmPasswordChangeHandler}
+                        value={confirmPassword}
                     />
                     <input
                         className="btn submit"
                         type="submit"
-                        defaultValue="Register"
+                        value="Register"
                     />
                 </div>
             </form>
