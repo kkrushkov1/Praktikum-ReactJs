@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as gameService from "./services/gameService";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -16,7 +16,6 @@ import "./App.css";
 
 function App() {
     const [games, setGames] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         gameService.getAll().then((result) => {
@@ -26,20 +25,14 @@ function App() {
 
     const gameAdd = (gameData) => {
         setGames((state) => [...state, gameData]);
-        navigate("/catalog");
     };
 
     const gameEdit = (gameId, gameData) => {
-        if (!gameData || typeof gameData !== "object" || !gameData.id) {
-            console.log("Invalid game data, skipping update");
-            return;
-        }
         setGames((state) => state.map((x) => (x.id === gameId ? gameData : x)));
     };
 
     const gameDelete = (gameId) => {
         setGames((state) => state.filter((game) => game.id !== gameId));
-        navigate("/");
     };
 
     return (
@@ -52,7 +45,7 @@ function App() {
                 >
                     <main id="main-content">
                         <Routes>
-                            <Route path="/" element={<Home games={games} />} />
+                            <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/logout" element={<Logout />} />
@@ -61,17 +54,10 @@ function App() {
                                 path="/games/:gameId/edit"
                                 element={<EditGame />}
                             />
-                            <Route
-                                path="/catalog"
-                                element={<Catalog games={games} />}
-                            />
+                            <Route path="/catalog" element={<Catalog />} />
                             <Route
                                 path="/catalog/:gameId"
-                                element={
-                                    <GameDetails
-                                    // addComment={addComment}
-                                    />
-                                }
+                                element={<GameDetails />}
                             />
                         </Routes>
                     </main>

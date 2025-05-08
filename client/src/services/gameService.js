@@ -12,3 +12,6 @@ export const edit = (gameId, gameData) =>
     request.put(`${baseUrl}/${gameId}`, gameData);
 
 export const deleteById = (id) => request.del(`${baseUrl}/${id}`);
+
+export const addComments = (gameId, comment) =>
+    request.patch(`${baseUrl}/${gameId}`, comment);

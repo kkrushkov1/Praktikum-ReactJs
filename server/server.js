@@ -6,6 +6,7 @@ const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 const rules = auth.rewriter({
     games: 644, // User must own the resource to write the resource. Everyone can read the resource.
+    comments: 664, // User must be logged to write the resource. Everyone can read the resource.
 });
 
 app.db = router.db;

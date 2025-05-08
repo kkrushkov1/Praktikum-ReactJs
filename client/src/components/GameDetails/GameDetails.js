@@ -1,18 +1,31 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { GameContext } from "../../contexts/GameContext";
 import * as gameService from "../../services/gameService";
+import * as commentService from "../../services/commentService";
 
 export const GameDetails = () => {
     const { gameId } = useParams();
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { gameDelete } = useContext(GameContext);
     const [game, setGame] = useState("");
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState({
+        username: user.user?.email,
+        comment: "",
+    });
 
     useEffect(() => {
         gameService.getById(gameId).then((result) => {
             setGame(result);
+        });
+    }, [gameId]);
+
+    useEffect(() => {
+        commentService.getByGameId(gameId).then((result) => {
+            setComments(result);
         });
     }, [gameId]);
 
@@ -26,6 +39,30 @@ export const GameDetails = () => {
         }
         await gameService.deleteById(gameId); // don't use result
         gameDelete(gameId);
+        navigate("/");
+    };
+
+    const addCommentHandler = async (e) => {
+        e.preventDefault();
+
+        const newComment = {
+            text: comment.comment,
+            gameId: gameId,
+            userName: user.user?.email,
+        };
+
+        const savedComment = await commentService.createComment(newComment);
+
+        setComments((prevComments) => [...prevComments, savedComment]);
+
+        setComment((prev) => ({ ...prev, comment: "" }));
+    };
+
+    const onChange = (e) => {
+        setComment((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
     };
 
     return (
@@ -43,14 +80,15 @@ export const GameDetails = () => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
+                        {comments?.map((x) => (
+                            <li className="comment" key={x.id}>
+                                <p>
+                                    <strong>{x.userName}</strong> : {x.text}
+                                </p>
+                            </li>
+                        ))}
                     </ul>
-                    <p className="no-comment">No comments.</p>
+                    {!comments && <p className="no-comment">No comments.</p>}
                 </div>
 
                 {user.user && user.user.id === game.userId && (
@@ -65,21 +103,24 @@ export const GameDetails = () => {
                 )}
             </div>
 
-            <article className="create-comment">
-                <label>Add new comment:</label>
-                <form className="form">
-                    <textarea
-                        name="comment"
-                        placeholder="Comment......"
-                        defaultValue={""}
-                    />
-                    <input
-                        className="btn submit"
-                        type="submit"
-                        defaultValue="Add Comment"
-                    />
-                </form>
-            </article>
+            {user.user?.id && (
+                <article className="create-comment">
+                    <label>Add new comment:</label>
+                    <form className="form" onSubmit={addCommentHandler}>
+                        <textarea
+                            name="comment"
+                            placeholder="Comment......"
+                            onChange={onChange}
+                            value={comment.comment}
+                        />
+                        <input
+                            className="btn submit"
+                            type="submit"
+                            value="Add Comment"
+                        />
+                    </form>
+                </article>
+            )}
         </section>
     );
 };
