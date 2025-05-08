@@ -88,7 +88,9 @@ export const GameDetails = () => {
                             </li>
                         ))}
                     </ul>
-                    {!comments && <p className="no-comment">No comments.</p>}
+                    {comments?.length === 0 && (
+                        <p className="no-comment">No comments.</p>
+                    )}
                 </div>
 
                 {user.user && user.user.id === game.userId && (
