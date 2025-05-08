@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext";
@@ -7,14 +7,19 @@ import * as authService from "../../services/authService";
 export const Login = () => {
     const { userLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const { email, password } = Object.fromEntries(new FormData(e.target));
+        const loginInfo = {
+            email,
+            password,
+        };
 
         authService
-            .login(email, password)
+            .login(loginInfo)
             .then((authData) => {
                 userLogin(authData);
                 navigate("/");
@@ -22,6 +27,14 @@ export const Login = () => {
             .catch(() => {
                 navigate("/404");
             });
+    };
+
+    const emailChangeHandler = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const passwordChangeHandler = (e) => {
+        setPassword(e.target.value);
     };
 
     return (
@@ -35,13 +48,16 @@ export const Login = () => {
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Sokka@gmail.com"
+                        onChange={emailChangeHandler}
+                        value={email}
                     />
                     <label htmlFor="login-pass">Password:</label>
                     <input
                         type="password"
                         id="login-password"
                         name="password"
+                        onChange={passwordChangeHandler}
+                        value={password}
                     />
                     <input type="submit" className="btn submit" value="Login" />
                 </div>
@@ -49,5 +65,3 @@ export const Login = () => {
         </section>
     );
 };
-
-export default Login;
