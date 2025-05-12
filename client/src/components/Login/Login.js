@@ -10,7 +10,7 @@ export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const loginInfo = {
@@ -18,15 +18,9 @@ export const Login = () => {
             password,
         };
 
-        authService
-            .login(loginInfo)
-            .then((authData) => {
-                userLogin(authData);
-                navigate("/");
-            })
-            .catch(() => {
-                navigate("/404");
-            });
+        const authData = await authService.login(loginInfo);
+        userLogin(authData);
+        navigate("/");
     };
 
     const emailChangeHandler = (e) => {

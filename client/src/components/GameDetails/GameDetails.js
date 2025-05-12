@@ -18,15 +18,13 @@ export const GameDetails = () => {
     });
 
     useEffect(() => {
-        gameService.getById(gameId).then((result) => {
-            setGame(result);
-        });
+        const result = gameService.getById(gameId);
+        setGame(result);
     }, [gameId]);
 
     useEffect(() => {
-        commentService.getByGameId(gameId).then((result) => {
-            setComments(result);
-        });
+        const result = commentService.getByGameId(gameId);
+        setComments(result);
     }, [gameId]);
 
     const deleteGameHandler = async () => {

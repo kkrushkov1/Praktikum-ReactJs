@@ -12,7 +12,7 @@ export const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
@@ -24,10 +24,10 @@ export const Register = () => {
             email,
             password,
         };
-        authService.register(registerInfo).then((authData) => {
-            userLogin(authData);
-            navigate("/");
-        });
+
+        const authData = await authService.register(registerInfo);
+        userLogin(authData);
+        navigate("/");
     };
 
     const usernameChangeHandler = (e) => {

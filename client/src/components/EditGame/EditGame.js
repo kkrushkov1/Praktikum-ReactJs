@@ -16,13 +16,12 @@ export const EditGame = () => {
     const [summary, setSummary] = useState("");
 
     useEffect(() => {
-        gameService.getById(gameId).then((gameData) => {
-            setTitle(gameData.title);
-            setCategory(gameData.category);
-            setMaxLevel(gameData.maxLevel);
-            setImageUrl(gameData.imageUrl);
-            setSummary(gameData.summary);
-        });
+        const gameData = gameService.getById(gameId);
+        setTitle(gameData.title);
+        setCategory(gameData.category);
+        setMaxLevel(gameData.maxLevel);
+        setImageUrl(gameData.imageUrl);
+        setSummary(gameData.summary);
     }, []);
 
     const onSubmit = (e) => {
@@ -36,10 +35,9 @@ export const EditGame = () => {
             summary,
         };
 
-        gameService.edit(gameId, gameData).then((result) => {
-            gameEdit(gameId, result);
-            navigate(`/catalog/${gameId}`);
-        });
+        const result = gameService.edit(gameId, gameData);
+        gameEdit(gameId, result);
+        navigate(`/catalog/${gameId}`);
     };
 
     const changeTitleHandler = (e) => {

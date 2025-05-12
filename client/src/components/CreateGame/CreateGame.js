@@ -23,10 +23,9 @@ export const CreateGame = ({}) => {
             imageUrl,
             summary,
         };
-        gameService.create(gameData).then((result) => {
-            gameAdd(result);
-            navigate("/catalog");
-        });
+        const result = gameService.create(gameData);
+        gameAdd(result);
+        navigate("/catalog");
     };
 
     const changeTitleHandler = (e) => {

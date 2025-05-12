@@ -32,6 +32,7 @@ const request = async (method, url, data) => {
         return result;
     } catch (error) {
         console.log(error);
+        throw new Error(error.message || "Request failed");
     }
 };
 
