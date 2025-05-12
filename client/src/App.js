@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as gameService from "./services/gameService";
-import { AuthContext } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import { GameContext } from "./contexts/GameContext";
 import { Header } from "./components/Header/Header";
 import { Home } from "./components/Home/Home";
@@ -23,23 +23,6 @@ function App() {
         });
     }, []);
 
-    const [auth, setAuth] = useState(() => {
-        const stored = localStorage.getItem("auth");
-        return stored ? JSON.parse(stored) : {};
-    });
-
-    useEffect(() => {
-        localStorage.setItem("auth", JSON.stringify(auth));
-    }, [auth]);
-
-    const userLogin = (authData) => {
-        setAuth(authData);
-    };
-
-    const userLogout = () => {
-        setAuth({});
-    };
-
     const gameAdd = (gameData) => {
         setGames((state) => [...state, gameData]);
     };
@@ -53,7 +36,7 @@ function App() {
     };
 
     return (
-        <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
+        <AuthProvider>
             <div id="box">
                 <Header />
 
@@ -80,7 +63,7 @@ function App() {
                     </main>
                 </GameContext.Provider>
             </div>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 
